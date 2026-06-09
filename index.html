@@ -24,13 +24,23 @@
         .animate-spin-slow {
             animation: spin-slow 20s linear infinite;
         }
+        /* 列印時隱藏不需要的元件 */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+        /* IG 漸層背景色 */
+        .bg-instagram {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+        }
     </style>
 </head>
-<body class="min-h-screen bg-[#F4F6F0] text-gray-800 antialiased pb-16">
+<body class="min-h-screen bg-[#F4F6F0] text-gray-800 antialiased pb-16 relative">
 
     <!-- 頂部柔和暖陽 Header -->
     <header class="relative overflow-hidden bg-[#8FA882] text-white py-12 px-4 shadow-sm">
-        <div class="absolute top-0 right-0 transform translate-x-12 -translate-y-12 opacity-10">
+        <div class="absolute top-0 right-0 transform translate-x-12 -translate-y-12 opacity-10 no-print">
             <!-- Sun SVG Icon -->
             <svg class="w-80 h-80 animate-spin-slow text-yellow-200" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 6a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0-4a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1zM4.22 4.22a1 1 0 0 1 1.42 0l.7.7a1 1 0 1 1-1.42 1.42l-.7-.7a1 1 0 0 1 0-1.42zm13.38 13.38a1 1 0 0 1 1.42 0l.7.7a1 1 0 1 1-1.42 1.42l-.7-.7a1 1 0 0 1 0-1.42zM2 12a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1zm16 0a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2h-1a1 1 0 0 1-1-1zM4.22 19.78a1 1 0 0 1 0-1.42l.7-.7a1 1 0 1 1 1.42 1.42l-.7.7a1 1 0 0 1-1.42 0zm13.38-13.38a1 1 0 0 1 0-1.42l.7-.7a1 1 0 1 1 1.42 1.42l-.7.7a1 1 0 0 1-1.42 0z"/>
@@ -52,7 +62,7 @@
 
     <!-- 核心控制面板 -->
     <main class="max-w-5xl mx-auto px-4 -mt-6">
-        <div class="bg-white rounded-2xl shadow-md p-6 md:p-8 mb-8 border border-[#8FA882]/10">
+        <div class="bg-white rounded-2xl shadow-md p-6 md:p-8 mb-8 border border-[#8FA882]/10 no-print">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                 <!-- 左側：日期設定 -->
                 <div class="space-y-3">
@@ -98,7 +108,7 @@
                             0%
                         </span>
                         <button
-                          id="reset-btn"
+                          id="open-reset-modal-btn"
                           class="text-xs font-medium text-gray-500 hover:text-red-500 transition flex items-center gap-1"
                         >
                           🔄 重設公版
@@ -122,15 +132,42 @@
         <!-- 互動時間軸容器 -->
         <div class="relative">
             <!-- 時間軸中間線 -->
-            <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-[#8FA882]/20 rounded-full hidden md:block"></div>
+            <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-[#8FA882]/20 rounded-full hidden md:block no-print"></div>
 
             <div id="timeline-container" class="space-y-12">
                 <!-- 由 JavaScript 動態生成 -->
             </div>
         </div>
 
+        <!-- 🌿 行光合作用品牌特調卡片 (IG 傳送門) -->
+        <div class="mt-16 bg-[#F8FAF6] rounded-3xl p-6 md:p-8 shadow-sm border border-[#8FA882]/20 text-center max-w-2xl mx-auto no-print">
+            <div class="inline-flex p-3.5 rounded-full bg-[#8FA882]/10 text-[#8FA882] mb-4 text-3xl animate-pulse">
+                🌿
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2 font-serif-tc">
+                在 IG 上，與我們一起行光合作用 ☀️
+            </h3>
+            <p class="text-sm text-gray-500 leading-relaxed mb-6 max-w-md mx-auto">
+                籌備婚禮是一趟美麗的旅程。追蹤我們的 Instagram，獲得最新最美、最療癒的婚禮備婚指南與靈感日常！
+            </p>
+            <div class="flex justify-center">
+                <!-- ⚠️ 這裡已為您更新為專屬 IG 連結 ⚠️ -->
+                <a
+                  href="https://www.instagram.com/sunny_yeh_wedding/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-6 py-3 bg-instagram text-white text-sm font-bold rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2 transform hover:-translate-y-0.5"
+                >
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                    </svg>
+                    <span>追蹤 Sunny 的 IG 傳送門</span>
+                </a>
+            </div>
+        </div>
+
         <!-- 備份與列印說明區 -->
-        <div class="mt-16 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 text-center max-w-2xl mx-auto">
+        <div class="mt-8 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 text-center max-w-2xl mx-auto no-print">
             <div class="inline-flex p-3 rounded-full bg-[#8FA882]/10 text-[#8FA882] mb-4 text-2xl">
                 🖨️
             </div>
@@ -151,7 +188,7 @@
     </main>
 
     <!-- 底部 Footer -->
-    <footer class="mt-20 border-t border-gray-200 pt-8 text-center text-xs text-gray-400">
+    <footer class="mt-20 border-t border-gray-200 pt-8 text-center text-xs text-gray-400 no-print">
         <div class="flex justify-center items-center gap-1.5 mb-2">
             <span class="text-yellow-500">☀️</span>
             <span class="font-semibold text-gray-500">BE YOUR SUN</span>
@@ -159,6 +196,49 @@
         <p class="mb-1">陪伴每一對新人，照亮通往幸福的每一步路</p>
         <p class="text-[10px] px-4">本時間表為推薦模板。籌備細節與日程，請依照您個人的喜好及當前情況進行微調與彈性分配。</p>
     </footer>
+
+    <!-- 📱 右下角療癒系浮動按鈕 (IG Floating Button) -->
+    <div class="fixed bottom-6 right-6 z-40 no-print">
+        <!-- ⚠️ 這裡已為您更新為專屬 IG 連結 ⚠️ -->
+        <a 
+          href="https://www.instagram.com/sunny_yeh_wedding/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 px-4 py-3 bg-white text-gray-700 hover:text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-instagram border border-gray-100 group"
+        >
+            <span class="w-8 h-8 rounded-full bg-instagram text-white flex items-center justify-center shadow-inner group-hover:bg-white group-hover:text-pink-600 transition-colors">
+                <svg class="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                </svg>
+            </span>
+            <span class="text-xs font-bold tracking-wider pr-1">行光合作用 IG ☀️</span>
+        </a>
+    </div>
+
+    <!-- ⚠️ Canva 救星：特製防當機客製化彈出視窗 (Custom Modal) ⚠️ -->
+    <div id="custom-confirm-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden no-print">
+        <div class="bg-white rounded-3xl p-6 md:p-8 max-w-sm w-full mx-4 shadow-2xl border border-gray-100 text-center transform scale-95 transition-transform duration-300">
+            <div class="text-4xl mb-3">🔄</div>
+            <h4 class="text-lg font-bold text-gray-800 mb-2 font-serif-tc">確定要重設為公版嗎？</h4>
+            <p class="text-sm text-gray-500 leading-relaxed mb-6">
+                這將會清除您目前勾選的進度，以及您自己手動新增的所有自訂項目喔！
+            </p>
+            <div class="flex gap-3">
+                <button 
+                  id="modal-cancel-btn"
+                  class="flex-1 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-semibold rounded-xl transition"
+                >
+                    取消
+                </button>
+                <button 
+                  id="modal-confirm-btn"
+                  class="flex-1 py-2.5 bg-[#8FA882] hover:bg-[#7b946f] text-white text-sm font-semibold rounded-xl shadow-md transition"
+                >
+                    確定清除
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript 邏輯控制 -->
     <script>
@@ -280,20 +360,38 @@
         let phases = [];
         let weddingDate = '';
 
-        // 初始化
+        // 讀取與安全性驗證初始化
         function init() {
-            // 讀取本地儲存
-            const savedPhases = localStorage.getItem('canva_wedding_phases');
-            const savedDate = localStorage.getItem('canva_wedding_date');
+            try {
+                const savedPhases = localStorage.getItem('canva_wedding_phases');
+                const savedDate = localStorage.getItem('canva_wedding_date');
 
-            phases = savedPhases ? JSON.parse(savedPhases) : JSON.parse(JSON.stringify(INITIAL_PHASES));
-            weddingDate = savedDate || '';
+                if (savedPhases) {
+                    phases = JSON.parse(savedPhases);
+                    // 嚴格結構驗證，防範錯誤的快取干擾網頁
+                    if (!Array.isArray(phases) || phases.length === 0 || !phases[0].tasks) {
+                        throw new Error("Corrupted storage structure");
+                    }
+                } else {
+                    phases = JSON.parse(JSON.stringify(INITIAL_PHASES));
+                }
+                weddingDate = savedDate || '';
+            } catch (error) {
+                console.warn("本地暫存資料結構不正常，自動覆蓋為乾淨版本：", error);
+                phases = JSON.parse(JSON.stringify(INITIAL_PHASES));
+                weddingDate = '';
+                saveToStorage();
+            }
 
             document.getElementById('wedding-date-input').value = weddingDate;
 
-            // 事件綁定
+            // 日期變動事件綁定
             document.getElementById('wedding-date-input').addEventListener('change', handleDateChange);
-            document.getElementById('reset-btn').addEventListener('click', handleReset);
+            
+            // 綁定特製防當機 Modal 事件
+            document.getElementById('open-reset-modal-btn').addEventListener('click', openResetModal);
+            document.getElementById('modal-cancel-btn').addEventListener('click', closeResetModal);
+            document.getElementById('modal-confirm-btn').addEventListener('click', handleReset);
 
             render();
         }
@@ -311,13 +409,23 @@
             render();
         }
 
-        // 重設
+        // 彈出重設提示窗 (Canva 安全替代方案)
+        function openResetModal() {
+            const modal = document.getElementById('custom-confirm-modal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeResetModal() {
+            const modal = document.getElementById('custom-confirm-modal');
+            modal.classList.add('hidden');
+        }
+
+        // 真正執行重設
         function handleReset() {
-            if (confirm('確定要重設所有籌備任務與勾選狀態嗎？這將會清除您自行新增的任務。')) {
-                phases = JSON.parse(JSON.stringify(INITIAL_PHASES));
-                saveToStorage();
-                render();
-            }
+            phases = JSON.parse(JSON.stringify(INITIAL_PHASES));
+            saveToStorage();
+            closeResetModal();
+            render();
         }
 
         // 切換任務狀態
@@ -349,7 +457,7 @@
             render();
         }
 
-        // 新增任務
+        // 新增自訂任務
         window.addTask = function(phaseId) {
             const input = document.getElementById(`input-${phaseId}`);
             const text = input.value.trim();
@@ -372,7 +480,7 @@
             render();
         }
 
-        // 快速勾選整組
+        // 快速勾選整組項目
         window.toggleAllInPhase = function(phaseId, shouldComplete) {
             phases = phases.map(phase => {
                 if (phase.id === phaseId) {
@@ -441,7 +549,7 @@
             document.getElementById('progress-percent').innerText = `${percent}%`;
         }
 
-        // 渲染畫面
+        // 渲染整個時間軸畫面
         function render() {
             const container = document.getElementById('timeline-container');
             container.innerHTML = '';
@@ -453,7 +561,7 @@
                 const completedInPhase = phase.tasks.filter(t => t.completed).length;
                 const isAllCompleted = totalInPhase > 0 && completedInPhase === totalInPhase;
 
-                // 生成任務的 HTML
+                // 生成任務的 HTML 項目列表
                 let tasksHTML = '';
                 if (phase.tasks.length === 0) {
                     tasksHTML = `<p class="text-center text-sm text-gray-400 py-4">此階段無待辦項目，可以自己新增喔！</p>`;
@@ -482,11 +590,11 @@
                     </div>
                 ` : '';
 
-                // 卡片 HTML
+                // 卡片結構 HTML
                 const cardHTML = `
                     <div class="flex flex-col md:flex-row items-center w-full relative ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}">
                         <!-- 中間裝飾節點 -->
-                        <div class="absolute left-1/2 transform -translate-x-1/2 z-10 w-10 h-10 rounded-full bg-white border-4 border-[#8FA882] shadow-sm flex items-center justify-center hidden md:flex">
+                        <div class="absolute left-1/2 transform -translate-x-1/2 z-10 w-10 h-10 rounded-full bg-white border-4 border-[#8FA882] shadow-sm flex items-center justify-center hidden md:flex no-print">
                             <span class="text-lg ${isAllCompleted ? 'animate-bounce' : 'opacity-60'}">☀️</span>
                         </div>
 
@@ -506,7 +614,7 @@
 
                                 <!-- 任務列表 -->
                                 <div class="p-5 space-y-3">
-                                    <div class="flex items-center justify-between text-xs text-gray-400 mb-1 border-b border-gray-50 pb-2">
+                                    <div class="flex items-center justify-between text-xs text-gray-400 mb-1 border-b border-gray-50 pb-2 no-print">
                                         <span>待辦清單項目</span>
                                         <div class="space-x-2">
                                             <button onclick="toggleAllInPhase('${phase.id}', true)" class="hover:text-[#8FA882] transition">全部勾選</button>
@@ -518,7 +626,7 @@
                                     ${tasksHTML}
 
                                     <!-- 新增任務 -->
-                                    <div class="mt-4 pt-3 border-t border-dashed border-gray-100 flex items-center gap-2">
+                                    <div class="mt-4 pt-3 border-t border-dashed border-gray-100 flex items-center gap-2 no-print">
                                         <input
                                             type="text"
                                             id="input-${phase.id}"
