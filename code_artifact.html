@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BE YOUR SUN - 專屬婚禮籌備時間軸</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        .font-serif-tc {
+            font-family: 'Noto Serif TC', serif;
+        }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 20s linear infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-[#F4F6F0] text-gray-800 antialiased pb-16">
+
+    <!-- 頂部柔和暖陽 Header -->
+    <header class="relative overflow-hidden bg-[#8FA882] text-white py-12 px-4 shadow-sm">
+        <div class="absolute top-0 right-0 transform translate-x-12 -translate-y-12 opacity-10">
+            <!-- Sun SVG Icon -->
+            <svg class="w-80 h-80 animate-spin-slow text-yellow-200" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 6a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0-4a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1zM4.22 4.22a1 1 0 0 1 1.42 0l.7.7a1 1 0 1 1-1.42 1.42l-.7-.7a1 1 0 0 1 0-1.42zm13.38 13.38a1 1 0 0 1 1.42 0l.7.7a1 1 0 1 1-1.42 1.42l-.7-.7a1 1 0 0 1 0-1.42zM2 12a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1zm16 0a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2h-1a1 1 0 0 1-1-1zM4.22 19.78a1 1 0 0 1 0-1.42l.7-.7a1 1 0 1 1 1.42 1.42l-.7.7a1 1 0 0 1-1.42 0zm13.38-13.38a1 1 0 0 1 0-1.42l.7-.7a1 1 0 1 1 1.42 1.42l-.7.7a1 1 0 0 1-1.42 0z"/>
+            </svg>
+        </div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center justify-center space-x-2 bg-white/20 backdrop-blur-md py-1.5 px-4 rounded-full text-xs font-semibold tracking-wider uppercase mb-4 text-emerald-50">
+                <span class="mr-1">☀️</span>
+                <span>BE YOUR SUN • 陪你照亮完美婚禮</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-3 font-serif-tc">
+                專屬婚禮籌備時間軸
+            </h1>
+            <p class="text-emerald-50 max-w-xl mx-auto text-sm md:text-base font-light leading-relaxed">
+                這是一份為您精心梳理的公版籌備指南。您可以在下方輸入您的婚禮日期，我們會自動為您量身計算專屬時間表，還能自由新增項目、記錄您的完美步調！
+            </p>
+        </div>
+    </header>
+
+    <!-- 核心控制面板 -->
+    <main class="max-w-5xl mx-auto px-4 -mt-6">
+        <div class="bg-white rounded-2xl shadow-md p-6 md:p-8 mb-8 border border-[#8FA882]/10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                <!-- 左側：日期設定 -->
+                <div class="space-y-3">
+                    <label class="block text-sm font-semibold text-gray-700 flex items-center gap-1.5">
+                        <span class="text-[#8FA882]">📅</span>
+                        第一步：請設定您的「婚禮日期」
+                    </label>
+                    <div class="relative">
+                        <input
+                            type="date"
+                            id="wedding-date-input"
+                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#8FA882]/40 focus:border-[#8FA882] transition text-gray-700 font-medium"
+                        />
+                    </div>
+                    <p class="text-xs text-gray-400">
+                        ※ 設定後，下方各個階段將會自動換算為真實的西元日期。
+                    </p>
+                </div>
+
+                <!-- 右側：籌備進度看板 -->
+                <div class="bg-[#F8FAF6] p-5 rounded-xl border border-[#8FA882]/15 flex flex-col justify-between h-full">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-semibold text-emerald-900 flex items-center gap-1.5">
+                            <span>✅</span>
+                            目前籌備進度
+                        </span>
+                        <span id="progress-text" class="text-xs text-gray-500 bg-white px-2 py-0.5 rounded-full border border-gray-100 font-mono">
+                            0 / 0 項完成
+                        </span>
+                    </div>
+                    
+                    <!-- 進度條 -->
+                    <div class="w-full bg-gray-200 h-3.5 rounded-full overflow-hidden mb-3">
+                        <div 
+                            id="progress-bar"
+                            class="bg-[#8FA882] h-full rounded-full transition-all duration-500 ease-out"
+                            style="width: 0%"
+                        ></div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <span id="progress-percent" class="text-2xl font-bold font-mono text-[#8FA882]">
+                            0%
+                        </span>
+                        <button
+                          id="reset-btn"
+                          class="text-xs font-medium text-gray-500 hover:text-red-500 transition flex items-center gap-1"
+                        >
+                          🔄 重設公版
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 溫馨提醒框 -->
+            <div class="mt-6 p-4 bg-amber-50/60 rounded-xl border border-amber-100 flex items-start gap-3">
+                <span class="text-amber-600 mt-0.5">💡</span>
+                <div class="text-xs md:text-sm text-amber-800 leading-relaxed">
+                    <span class="font-semibold">貼心提醒：</span>
+                    本時間軸為<span class="font-semibold underline">公版參考建議</span>。
+                    每對新人與每場婚禮都是獨一無二的，實際執行時請務必依照您與伴侶的實務步調、預算、個人喜好進行彈性微調。
+                    享受籌備的過程，才是最珍貴的體驗！
+                </div>
+            </div>
+        </div>
+
+        <!-- 互動時間軸容器 -->
+        <div class="relative">
+            <!-- 時間軸中間線 -->
+            <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-[#8FA882]/20 rounded-full hidden md:block"></div>
+
+            <div id="timeline-container" class="space-y-12">
+                <!-- 由 JavaScript 動態生成 -->
+            </div>
+        </div>
+
+        <!-- 備份與列印說明區 -->
+        <div class="mt-16 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 text-center max-w-2xl mx-auto">
+            <div class="inline-flex p-3 rounded-full bg-[#8FA882]/10 text-[#8FA882] mb-4 text-2xl">
+                🖨️
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2 font-serif-tc">需要將這份計畫印出來嗎？</h3>
+            <p class="text-sm text-gray-500 leading-relaxed mb-6">
+                您的籌備進度和自訂任務會<span class="font-semibold text-emerald-800">自動儲存於您的瀏覽器中</span>，下次打開網頁還在。
+                您也可以將這個客製化網頁直接存成 PDF 或列印，隨時與另一半或婚顧公司討論！
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center">
+                <button
+                  onclick="window.print()"
+                  class="px-5 py-2.5 bg-[#8FA882] hover:bg-[#7b946f] text-white text-sm font-semibold rounded-xl shadow-sm transition flex items-center gap-2"
+                >
+                  <span>🖨️</span> 列印 / 另存為 PDF
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 底部 Footer -->
+    <footer class="mt-20 border-t border-gray-200 pt-8 text-center text-xs text-gray-400">
+        <div class="flex justify-center items-center gap-1.5 mb-2">
+            <span class="text-yellow-500">☀️</span>
+            <span class="font-semibold text-gray-500">BE YOUR SUN</span>
+        </div>
+        <p class="mb-1">陪伴每一對新人，照亮通往幸福的每一步路</p>
+        <p class="text-[10px] px-4">本時間表為推薦模板。籌備細節與日程，請依照您個人的喜好及當前情況進行微調與彈性分配。</p>
+    </footer>
+
+    <!-- JavaScript 邏輯控制 -->
+    <script>
+        const INITIAL_PHASES = [
+            {
+                id: '12_month',
+                title: '婚禮準備 12 個月前',
+                offsetMonthsStart: 12,
+                offsetMonthsEnd: 12,
+                align: 'left',
+                tasks: [
+                    { id: '12m-1', text: '婚禮預算分配', completed: false, isCustom: false },
+                    { id: '12m-2', text: '婚禮廠商安排（新秘、攝影、主持等熱門檔期搶訂）', completed: false, isCustom: false },
+                    { id: '12m-3', text: '確認宴客日期（合八字或挑選好日子）', completed: false, isCustom: false },
+                    { id: '12m-4', text: '討論場地需求（戶外、飯店、婚宴會館）', completed: false, isCustom: false },
+                    { id: '12m-5', text: '大約桌數預估（統計雙方至親好友基礎人數）', completed: false, isCustom: false },
+                    { id: '12m-6', text: '尋找宴客場地', completed: false, isCustom: false },
+                    { id: '12m-7', text: '場地下訂簽約', completed: false, isCustom: false }
+                ],
+                tips: '這個階段最重要的是「場地」與「神級廠商」！熱門的日子與廠商通常一年前就會被訂滿，務必優先確認。'
+            },
+            {
+                id: '12-5_month',
+                title: '婚禮準備 12 - 5 個月前',
+                offsetMonthsStart: 12,
+                offsetMonthsEnd: 5,
+                align: 'right',
+                tasks: [
+                    { id: '12-5m-1', text: '婚戒挑選以及訂製', completed: false, isCustom: false },
+                    { id: '12-5m-2', text: '其餘婚禮廠商下訂簽約', completed: false, isCustom: false },
+                    { id: '12-5m-3', text: '安排婚紗拍攝日期（考量修片與製作期，建議提早拍攝）', completed: false, isCustom: false }
+                ],
+                tips: '拍婚紗要預留「拍攝、挑片、修片、排版、印刷」的時間，至少需要 3 個月。若想要特定季節的景色（如櫻花、芒草），更要提早規劃！'
+            },
+            {
+                id: '5-4_month',
+                title: '婚禮準備 5 - 4 個月前',
+                offsetMonthsStart: 5,
+                offsetMonthsEnd: 4,
+                align: 'left',
+                tasks: [
+                    { id: '5-4m-1', text: '婚禮喜帖設計（風格討論、排版）', completed: false, isCustom: false },
+                    { id: '5-4m-2', text: '線上表單設計（出席意願調查問卷）', completed: false, isCustom: false },
+                    { id: '5-4m-3', text: '婚禮影片製作（開場影片、成長感恩影片）', completed: false, isCustom: false }
+                ],
+                tips: '開始進入視覺設計階段。不論是實體喜帖或是電子喜帖，風格可以和婚禮主題色調做搭配，讓整體感更一致。'
+            },
+            {
+                id: '4-3_month',
+                title: '婚禮準備 4 - 3 個月前',
+                offsetMonthsStart: 4,
+                offsetMonthsEnd: 3,
+                align: 'right',
+                tasks: [
+                    { id: '4-3m-1', text: '喜餅試吃與挑選', completed: false, isCustom: false },
+                    { id: '4-3m-2', text: '婚鞋挑選與訂製', completed: false, isCustom: false },
+                    { id: '4-3m-3', text: '宴客禮服挑選（第一次試穿與挑選）', completed: false, isCustom: false }
+                ],
+                tips: '帶上拍照時穿的無肩帶內衣（NuBra）去試穿宴客禮服，可以更準確感受版型。喜餅試吃通常需要預約，可以當作與另一半的甜蜜約會行程！'
+            },
+            {
+                id: '3-2_month',
+                title: '婚禮準備 3 - 2 個月前',
+                offsetMonthsStart: 3,
+                offsetMonthsEnd: 2,
+                align: 'left',
+                tasks: [
+                    { id: '3-2m-1', text: '婚禮喜帖印製', completed: false, isCustom: false },
+                    { id: '3-2m-2', text: '發送線上表單填寫（收集親友收件地址與出席人數）', completed: false, isCustom: false },
+                    { id: '3-2m-3', text: '婚禮流程洽談（與企劃、主持人討論活動細節）', completed: false, isCustom: false }
+                ],
+                tips: '這個階段要開始回收親友的名單。建議表單截止日設在婚禮前一個半月，保留時間核對，才不會手忙腳亂。'
+            },
+            {
+                id: '2-1_month',
+                title: '婚禮準備 2 - 1 個月前',
+                offsetMonthsStart: 2,
+                offsetMonthsEnd: 1,
+                align: 'right',
+                tasks: [
+                    { id: '2-1m-1', text: '婚禮用品採買（車彩、胸花、紅包、遊戲小禮物）', completed: false, isCustom: false },
+                    { id: '2-1m-2', text: '喜宴菜色確認與試菜', completed: false, isCustom: false },
+                    { id: '2-1m-3', text: '餐廳配套細節確認（硬體、音控、新娘房設備）', completed: false, isCustom: false },
+                    { id: '2-1m-4', text: '西服租借與量身訂製（新郎與主婚人）', completed: false, isCustom: false }
+                ],
+                tips: '試菜時建議邀請雙方家長一同前往，確認菜量與口味是否符合賓客習慣。此時也該陸續買齊婚禮遊戲要用到的禮物囉！'
+            },
+            {
+                id: '1_month-2_weeks',
+                title: '婚禮準備 1 個月 - 2 週前',
+                offsetMonthsStart: 1,
+                offsetWeeksEnd: 2,
+                align: 'left',
+                tasks: [
+                    { id: '1m-2w-1', text: '統計最終賓客名單', completed: false, isCustom: false },
+                    { id: '1m-2w-2', text: '婚禮影片測試（確認解析度與播放比例）', completed: false, isCustom: false },
+                    { id: '1m-2w-3', text: '宴客動線場勘與音響、投影設備測試', completed: false, isCustom: false },
+                    { id: '1m-2w-4', text: '桌數最終統計並回覆給飯店/場地', completed: false, isCustom: false }
+                ],
+                tips: '一定要親自抽空到宴客現場實地測試影片、音樂與簡報，確認格式相容無誤，避開當天播放不出來的尷尬情況。'
+            },
+            {
+                id: '2_weeks',
+                title: '婚禮最後 2 週',
+                offsetWeeksStart: 2,
+                offsetWeeksEnd: 0,
+                align: 'right',
+                tasks: [
+                    { id: '2w-1', text: '流程所有細節與工作人員總確認', completed: false, isCustom: false },
+                    { id: '2w-2', text: '婚禮前一天行程詳細安排', completed: false, isCustom: false },
+                    { id: '2w-3', text: '座位名單確認與桌卡印製', completed: false, isCustom: false },
+                    { id: '2w-4', text: '美容、美甲與全身 SPA（放鬆心情）', completed: false, isCustom: false }
+                ],
+                tips: '最後一哩路，把雜事分工給信任的工作人員（伴郎伴娘、招待）。新人們最重要的任務就是早點休息、做好肌膚保濕，當天以最完美的狀態閃亮登場！'
+            }
+        ];
+
+        let phases = [];
+        let weddingDate = '';
+
+        // 初始化
+        function init() {
+            // 讀取本地儲存
+            const savedPhases = localStorage.getItem('canva_wedding_phases');
+            const savedDate = localStorage.getItem('canva_wedding_date');
+
+            phases = savedPhases ? JSON.parse(savedPhases) : JSON.parse(JSON.stringify(INITIAL_PHASES));
+            weddingDate = savedDate || '';
+
+            document.getElementById('wedding-date-input').value = weddingDate;
+
+            // 事件綁定
+            document.getElementById('wedding-date-input').addEventListener('change', handleDateChange);
+            document.getElementById('reset-btn').addEventListener('click', handleReset);
+
+            render();
+        }
+
+        // 儲存至本地
+        function saveToStorage() {
+            localStorage.setItem('canva_wedding_phases', JSON.stringify(phases));
+            localStorage.setItem('canva_wedding_date', weddingDate);
+        }
+
+        // 日期變動
+        function handleDateChange(e) {
+            weddingDate = e.target.value;
+            saveToStorage();
+            render();
+        }
+
+        // 重設
+        function handleReset() {
+            if (confirm('確定要重設所有籌備任務與勾選狀態嗎？這將會清除您自行新增的任務。')) {
+                phases = JSON.parse(JSON.stringify(INITIAL_PHASES));
+                saveToStorage();
+                render();
+            }
+        }
+
+        // 切換任務狀態
+        window.toggleTask = function(phaseId, taskId) {
+            phases = phases.map(phase => {
+                if (phase.id === phaseId) {
+                    phase.tasks = phase.tasks.map(task => {
+                        if (task.id === taskId) {
+                            task.completed = !task.completed;
+                        }
+                        return task;
+                    });
+                }
+                return phase;
+            });
+            saveToStorage();
+            render();
+        }
+
+        // 刪除自訂任務
+        window.deleteTask = function(phaseId, taskId) {
+            phases = phases.map(phase => {
+                if (phase.id === phaseId) {
+                    phase.tasks = phase.tasks.filter(task => task.id !== taskId);
+                }
+                return phase;
+            });
+            saveToStorage();
+            render();
+        }
+
+        // 新增任務
+        window.addTask = function(phaseId) {
+            const input = document.getElementById(`input-${phaseId}`);
+            const text = input.value.trim();
+            if (!text) return;
+
+            phases = phases.map(phase => {
+                if (phase.id === phaseId) {
+                    phase.tasks.push({
+                        id: `custom-${Date.now()}`,
+                        text: text,
+                        completed: false,
+                        isCustom: true
+                    });
+                }
+                return phase;
+            });
+
+            input.value = '';
+            saveToStorage();
+            render();
+        }
+
+        // 快速勾選整組
+        window.toggleAllInPhase = function(phaseId, shouldComplete) {
+            phases = phases.map(phase => {
+                if (phase.id === phaseId) {
+                    phase.tasks = phase.tasks.map(task => {
+                        task.completed = shouldComplete;
+                        return task;
+                    });
+                }
+                return phase;
+            });
+            saveToStorage();
+            render();
+        }
+
+        // 計算目標日期字串
+        function calculateTargetDateStr(phase) {
+            if (!weddingDate) return null;
+            const baseDate = new Date(weddingDate);
+            if (isNaN(baseDate.getTime())) return null;
+
+            const formatDate = (date) => {
+                const y = date.getFullYear();
+                const m = String(date.getMonth() + 1).padStart(2, '0');
+                const d = String(date.getDate()).padStart(2, '0');
+                return `${y}/${m}/${d}`;
+            };
+
+            let startDate = new Date(baseDate);
+            if (phase.offsetMonthsStart !== undefined) {
+                startDate.setMonth(baseDate.getMonth() - phase.offsetMonthsStart);
+            } else if (phase.offsetWeeksStart !== undefined) {
+                startDate.setDate(baseDate.getDate() - (phase.offsetWeeksStart * 7));
+            }
+
+            let endDate = new Date(baseDate);
+            if (phase.offsetMonthsEnd !== undefined) {
+                endDate.setMonth(baseDate.getMonth() - phase.offsetMonthsEnd);
+            } else if (phase.offsetWeeksEnd !== undefined) {
+                endDate.setDate(baseDate.getDate() - (phase.offsetWeeksEnd * 7));
+            }
+
+            if (startDate.getTime() === endDate.getTime()) {
+                return `約於 ${formatDate(startDate)} 左右`;
+            }
+
+            if (startDate > endDate) {
+                return `${formatDate(endDate)} ～ ${formatDate(startDate)}`;
+            }
+            return `${formatDate(startDate)} ～ ${formatDate(endDate)}`;
+        }
+
+        // 計算並更新進度條
+        function updateProgress() {
+            let total = 0;
+            let completed = 0;
+
+            phases.forEach(phase => {
+                total += phase.tasks.length;
+                completed += phase.tasks.filter(t => t.completed).length;
+            });
+
+            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+            document.getElementById('progress-text').innerText = `${completed} / ${total} 項完成`;
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+            document.getElementById('progress-percent').innerText = `${percent}%`;
+        }
+
+        // 渲染畫面
+        function render() {
+            const container = document.getElementById('timeline-container');
+            container.innerHTML = '';
+
+            phases.forEach(phase => {
+                const targetDateText = calculateTargetDateStr(phase);
+                const isLeft = phase.align === 'left';
+                const totalInPhase = phase.tasks.length;
+                const completedInPhase = phase.tasks.filter(t => t.completed).length;
+                const isAllCompleted = totalInPhase > 0 && completedInPhase === totalInPhase;
+
+                // 生成任務的 HTML
+                let tasksHTML = '';
+                if (phase.tasks.length === 0) {
+                    tasksHTML = `<p class="text-center text-sm text-gray-400 py-4">此階段無待辦項目，可以自己新增喔！</p>`;
+                } else {
+                    phase.tasks.forEach(task => {
+                        tasksHTML += `
+                            <div class="flex items-start gap-3 p-2.5 rounded-lg transition group ${task.completed ? 'bg-gray-50/70 text-gray-400' : 'hover:bg-gray-50 text-gray-700'}">
+                                <button onclick="toggleTask('${phase.id}', '${task.id}')" class="mt-0.5 w-5 h-5 rounded border flex items-center justify-center transition shrink-0 ${task.completed ? 'bg-[#8FA882] border-[#8FA882] text-white' : 'border-gray-300 hover:border-[#8FA882] bg-white'}">
+                                    ${task.completed ? '✓' : ''}
+                                </button>
+                                <span class="text-sm leading-relaxed flex-grow ${task.completed ? 'line-through' : ''}">${task.text}</span>
+                                ${task.isCustom ? `
+                                    <button onclick="deleteTask('${phase.id}', '${task.id}')" class="text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition duration-150 shrink-0 self-center" title="刪除">
+                                        🗑️
+                                    </button>
+                                ` : ''}
+                            </div>
+                        `;
+                    });
+                }
+
+                // 目標日期標籤
+                const dateBadge = targetDateText ? `
+                    <div class="inline-flex items-center gap-1.5 text-xs text-emerald-800 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-lg font-medium self-start sm:self-center">
+                        ⏱️ 建議期間: ${targetDateText}
+                    </div>
+                ` : '';
+
+                // 卡片 HTML
+                const cardHTML = `
+                    <div class="flex flex-col md:flex-row items-center w-full relative ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}">
+                        <!-- 中間裝飾節點 -->
+                        <div class="absolute left-1/2 transform -translate-x-1/2 z-10 w-10 h-10 rounded-full bg-white border-4 border-[#8FA882] shadow-sm flex items-center justify-center hidden md:flex">
+                            <span class="text-lg ${isAllCompleted ? 'animate-bounce' : 'opacity-60'}">☀️</span>
+                        </div>
+
+                        <!-- 卡片主體 -->
+                        <div class="w-full md:w-1/2 px-0 md:px-8">
+                            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 transition-all duration-300 overflow-hidden">
+                                <!-- 卡片標題 -->
+                                <div class="bg-[#F8FAF6] px-5 py-4 border-b border-[#8FA882]/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                                    <div>
+                                        <span class="text-xs font-semibold text-[#8FA882] bg-[#8FA882]/10 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                                            ${phase.title.replace('婚禮準備 ', '')}
+                                        </span>
+                                        <h3 class="text-lg font-bold text-gray-800 mt-1.5 font-serif-tc">${phase.title}</h3>
+                                    </div>
+                                    ${dateBadge}
+                                </div>
+
+                                <!-- 任務列表 -->
+                                <div class="p-5 space-y-3">
+                                    <div class="flex items-center justify-between text-xs text-gray-400 mb-1 border-b border-gray-50 pb-2">
+                                        <span>待辦清單項目</span>
+                                        <div class="space-x-2">
+                                            <button onclick="toggleAllInPhase('${phase.id}', true)" class="hover:text-[#8FA882] transition">全部勾選</button>
+                                            <span>|</span>
+                                            <button onclick="toggleAllInPhase('${phase.id}', false)" class="hover:text-red-400 transition">全部取消</button>
+                                        </div>
+                                    </div>
+
+                                    ${tasksHTML}
+
+                                    <!-- 新增任務 -->
+                                    <div class="mt-4 pt-3 border-t border-dashed border-gray-100 flex items-center gap-2">
+                                        <input
+                                            type="text"
+                                            id="input-${phase.id}"
+                                            placeholder="新增自訂備忘項目..."
+                                            onkeydown="if(event.key === 'Enter') addTask('${phase.id}')"
+                                            class="flex-grow px-3 py-1.5 text-xs bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#8FA882] focus:bg-white transition"
+                                        />
+                                        <button onclick="addTask('${phase.id}')" class="p-1.5 rounded-lg bg-[#8FA882]/10 hover:bg-[#8FA882] text-[#8FA882] hover:text-white transition shrink-0" title="新增">
+                                            ➕
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- 企劃師貼心指南 -->
+                                <div class="bg-[#FBFDF9] p-4 border-t border-gray-50 flex gap-2.5 items-start">
+                                    <span class="text-rose-400 mt-0.5">💖</span>
+                                    <div>
+                                        <h4 class="text-xs font-semibold text-emerald-950 mb-0.5">企劃小提醒</h4>
+                                        <p class="text-xs text-gray-500 leading-relaxed">${phase.tips}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 佔位空間 -->
+                        <div class="w-1/2 hidden md:block"></div>
+                    </div>
+                `;
+
+                container.innerHTML += cardHTML;
+            });
+
+            updateProgress();
+        }
+
+        // 網頁載入完成後初始化
+        window.onload = init;
+    </script>
+</body>
+</html>
